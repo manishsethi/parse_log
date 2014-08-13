@@ -23,7 +23,7 @@ echo "Count: $count"
 echo "Limit: $limit"
 if [ $count >  $limit ]
 then
-    echo "You had reached the limit. Email is send to Admin" | ssmtp -s "Test" manishsethi2009@gmail.com  # Sending email
+    echo "You had reached the limit. Email is send to Admin" | ssmtp -s "Test" admin@gmail.com  # Sending email
 else
     echo "its okay"
 fi
