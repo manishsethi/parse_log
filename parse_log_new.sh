@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-FILE= /home/minjar05/workspace/parse_log/qfchat-data-acquisition.log
+FILE= /home/minjar05/workspace/test.txt
 
 # Checking Avaialbility of file
 if [ ! -f $FILE ]
@@ -12,7 +12,17 @@ fi
 limit=10
 #count=`sudo grep -o "valid" $FILE | wc -l`
 
-count=sh /usr/lib/nagios/plugins/check_log -F /home/minjar05/workspace/parse_log/qfchat-data-acquisition.log -O /home/minjar05/workspace/parse_log/tmp.log -q "working" | awk -F'(' '{ print $2 }' | awk -F')' '{print $1}'
+sh /usr/lib/nagios/plugins/check_log -F /home/minjar05/workspace/parse_log/qfchat-data-acquisition.log -O /home/minjar05/workspace/parse_log/tmp.log -q "work"|awk -F'(' '{ print $2}' | awk -F')' '{print $1}' > output.txt
+
+
+count=$(sudo cat output.txt)
+
+
+
+
+
+
+#count=sh /usr/lib/nagios/plugins/check_log -F /home/minjar05/workspace/parse_log/qfchat-data-acquisition.log -O /home/minjar05/workspace/parse_log/tmp.log -q "working" | awk -F'(' '{ print $2 }' | awk -F')' '{print $1}'
 echo "Count: $count"
 echo "Limit: $limit"
 if [ $count >  $limit ]
