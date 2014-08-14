@@ -10,7 +10,8 @@ fi
 #Get current long of the file
 len=`wc -l $LOGFILE | awk '{ print $1 }'`
 echo "Current size is $len lines."
-
+count=0
+counter1=0
 while :
 do
     if [ -N $LOGFILE ]; then
@@ -28,15 +29,15 @@ do
 	
 echo "Count: $count"
 sudo tail -n $count /home/minjar05/workspace/parse_log/qfchat-data-acquisition.log > temp.txt
-#counter=`sudo grep -o "work" temp.txt | wc -l`
 limit=2
-#echo "counter: $counter"
 # Checking the limit
 awk '/work/ {for(i=1; i<=2; i++) {getline; print}}' temp.txt > output.txt
 counter1=`sudo grep -o "work" output.txt | wc -l`
 echo "counter: $counter1"
+echo "limit: $limit"
 if [ $counter1 -ge $limit ]
 then
+    echo "Limit Exceeded"
     echo "You had reached the limit. Email is send to Admin" | ssmtp -s "Test" admin@gmail.com  # Sending email
 else
     echo "its okay"
