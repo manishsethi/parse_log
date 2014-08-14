@@ -28,12 +28,16 @@ do
 	
 echo "Count: $count"
 sudo tail -n $count /home/minjar05/workspace/parse_log/qfchat-data-acquisition.log > temp.txt
-counter=`sudo grep -o "work" temp.txt | wc -l`
-limit=3
-echo "counter: $counter"
-if [ $counter -ge $limit ]
+#counter=`sudo grep -o "work" temp.txt | wc -l`
+limit=2
+#echo "counter: $counter"
+# Checking the limit
+awk '/work/ {for(i=1; i<=2; i++) {getline; print}}' temp.txt > output.txt
+counter1=`sudo grep -o "work" output.txt | wc -l`
+echo "counter: $counter1"
+if [ $counter1 -ge $limit ]
 then
-    echo "You had reached the limit. Email is send to Admin" | ssmtp -s "Test" manishsethi2009@gmail.com  # Sending email
+    echo "You had reached the limit. Email is send to Admin" | ssmtp -s "Test" admin@gmail.com  # Sending email
 else
     echo "its okay"
 fi
