@@ -1,5 +1,5 @@
 #!/bin/bash
-GAP=10    #How long to wait
+GAP=5    #How long to wait
 LOGFILE=$1 #File to log to
 
 if [ "$#" -ne "1" ]; then
@@ -28,11 +28,12 @@ do
 	
 echo "Count: $count"
 sudo tail -n $count /home/minjar05/workspace/parse_log/qfchat-data-acquisition.log > temp.txt
-count=`sudo grep -o "work" temp.txt | wc -l`
+counter=`sudo grep -o "work" temp.txt | wc -l`
 limit=3
-if [ $count -ge $limit ]
+echo "counter: $counter"
+if [ $counter -ge $limit ]
 then
-    echo "You got error too many times"
+    echo "You had reached the limit. Email is send to Admin" | ssmtp -s "Test" manishsethi2009@gmail.com  # Sending email
 else
     echo "its okay"
 fi
