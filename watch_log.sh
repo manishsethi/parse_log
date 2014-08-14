@@ -43,7 +43,7 @@ echo "limit: $limit"
 if [ $counter1 -ge $limit ]
 then
     echo "Limit Exceeded"
-    echo "You had reached the limit. Email is send to Admin" | ssmtp -s "Test" manishsethi2009@gmail.com  # Sending email
+    echo "You had reached the limit. Email is send to Admin" | ssmtp -s "Test" admin@gmail.com  # Sending email
 else
     echo "its okay"
 fi
